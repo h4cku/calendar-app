@@ -6,10 +6,19 @@
       <ul class="mb-4">
         <li
           *ngFor="let event of this.data.events"
-          (click)="selectEvent(event)"
-          class="cursor-pointer"
+          class="cursor-pointer grid grid-cols-2 gap-2"
         >
-          {{ event.title }}
+          <div>
+            {{ event.title }}
+          </div>
+          <div class="flex justify-end">
+            <button (click)="selectEvent(event)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button (click)="deleteEvent(event)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
         </li>
       </ul>
       <button
@@ -31,6 +40,7 @@
             [(ngModel)]="title"
             name="title"
             required
+            [disabled]="isHoliday"
             class="block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           />
         </div>
@@ -42,6 +52,7 @@
             name="description"
             rows="4"
             required
+            [disabled]="isHoliday"
             class="block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           ></textarea>
         </div>
@@ -52,6 +63,7 @@
             id="image"
             (change)="onFileSelected($event)"
             class="block"
+            [disabled]="isHoliday"
           />
         </div>
         <div>
@@ -62,6 +74,7 @@
             [(ngModel)]="fee"
             name="fee"
             required
+            [disabled]="isHoliday"
             class="block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
           />
         </div>
@@ -72,6 +85,7 @@
               [(ngModel)]="isHoliday"
               name="isHoliday"
               class="mr-2"
+              (change)="onHoliday(isHoliday)"
             />
             Is Holiday
           </label>

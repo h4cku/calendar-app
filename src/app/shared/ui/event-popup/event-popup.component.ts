@@ -1,17 +1,18 @@
 import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CalendarEvent } from '../../models';
+import { Observable } from 'rxjs';
+import { EventsService } from '../../services/events/events.service';
 
 @Component({
   selector: 'app-event-popup',
   // standalone: true,
   // imports: [],
   templateUrl: './event-popup.component.html',
-  styleUrl: './event-popup.component.scss'
+  styleUrl: './event-popup.component.scss',
 })
-
 export class EventPopupComponent {
-  @Output() eventAdded = new EventEmitter<CalendarEvent>();
+  @Output() eventAdded = new EventEmitter<CalendarEvent | any>();
 
   title: string = '';
   description: string = '';
@@ -20,8 +21,11 @@ export class EventPopupComponent {
   isHoliday: boolean = false;
   selectedEvent: any;
 
-  constructor(public dialogRef: MatDialogRef<EventPopupComponent>, @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+  constructor(
+    public dialogRef: MatDialogRef<EventPopupComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private cacheEventsService: EventsService
+  ) {}
   ngOnInit() {
     console.log(this.data);
   }
@@ -34,7 +38,7 @@ export class EventPopupComponent {
       description: this.description,
       image: this.image,
       fee: this.fee,
-      isHoliday: this.isHoliday
+      isHoliday: this.isHoliday,
     };
     this.eventAdded.emit(event);
     this.dialogRef.close();
@@ -55,7 +59,12 @@ export class EventPopupComponent {
 
   newEvent() {
     this.selectedEvent = new CalendarEvent();
-    console.log(this.selectedEvent);
+  }
+
+  deleteEvent(event: CalendarEvent) {
+    this.cacheEventsService.delete(event);
+    this.eventAdded.emit(null);
+    this.dialogRef.close();
   }
 
   goBackToList() {
@@ -64,5 +73,13 @@ export class EventPopupComponent {
     this.description = '';
     this.fee = 0;
     this.isHoliday = false;
+  }
+
+  onHoliday(holiday: boolean) {
+    if (holiday) {
+      this.title = 'Holiday';
+      this.description = '';
+      this.fee = 0;
+    }
   }
 }

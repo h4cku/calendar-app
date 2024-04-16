@@ -1,6 +1,8 @@
-<app-calendar (updateEvent)="update($event)"> </app-calendar>
-<div>
-  <textarea class="w-full" name="" id="" rows="10" [value]="summary">
-  </textarea>
+<div class="flex grid grid-cols-1 gap-2">
+  <app-calendar (updateEvent)="update($event)"> </app-calendar>
+  <div class="p-2">
+    <textarea class="w-full" name="" id="" rows="10" [value]="summary">
+    </textarea>
+  </div>
 </div>
 <router-outlet />
