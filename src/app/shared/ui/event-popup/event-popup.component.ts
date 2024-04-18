@@ -67,6 +67,10 @@ export class EventPopupComponent {
     this.dialogRef.close();
   }
 
+  closePopUp() {
+    this.dialogRef.close();
+  }
+
   goBackToList() {
     this.selectedEvent = null;
     this.title = '';
