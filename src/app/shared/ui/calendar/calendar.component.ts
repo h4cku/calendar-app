@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EventPopupComponent } from '../event-popup/event-popup.component';
 import { EventsService } from '../../services';
 import html2canvas from 'html2canvas';
+import { BgSelectorComponent } from '../bg-selector/bg-selector.component';
 
 @Component({
   selector: 'app-calendar',
@@ -118,6 +119,16 @@ export class CalendarComponent implements OnInit {
         month: this.currentMonth,
         year: this.currentYear,
       });
+    });
+  }
+
+  openBgSelector() {
+    const dialogRef = this.dialog.open(BgSelectorComponent, {
+      width: '500px', // Set the width of the pop-up window as needed
+      position: {
+        top: '50vh',
+        left: '50vh',
+      },
     });
   }
 

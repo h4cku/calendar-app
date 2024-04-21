@@ -81,7 +81,7 @@ export class EventPopupComponent {
 
   onHoliday(holiday: boolean) {
     if (holiday) {
-      this.title = 'Holiday';
+      this.title = '休日';
       this.description = '';
       this.fee = 0;
     }

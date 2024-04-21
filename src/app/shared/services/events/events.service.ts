@@ -60,15 +60,19 @@ export class EventsService {
         if (holidayEvents.length > 0) {
           s += events[0].date + '\n';
           s += '========================================\n';
-          s += 'Holiday\n';
+          s += '休日\n';
           s += '========================================\n';
         } else {
           s += events[0].date + '\n';
           s += '========================================\n';
           for (let j in events) {
-            s += events[j].title + '\n';
-            s += events[j].description + '\n';
-            s += events[j].fee + '\n';
+            s += events[j].title + '\n\n';
+            s += events[j].description + '\n\n';
+            if (events[j].fee == 0) {
+              s += '無料！' + '\n\n\n';
+            } else {
+              s += '参加費：￥' + events[j].fee + '\n\n\n';
+            }
           }
           s += '========================================\n';
         }

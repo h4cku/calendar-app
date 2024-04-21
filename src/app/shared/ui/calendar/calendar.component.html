@@ -1,21 +1,20 @@
 <div class="calendar">
   <div class="flex gap-2 pl-4 pt-2">
     <button (click)="download()"><mat-icon>download</mat-icon></button>
+    <!-- <button (click)="openBgSelector()"><mat-icon>image</mat-icon></button> -->
   </div>
   <div class="p-4" id="myCalendar">
     <div class="header bg-gray-200 p-4 flex justify-between items-center">
-      <button class="text-gray-600" (click)="goToPreviousMonth()">
-        Previous
-      </button>
+      <button class="text-gray-600" (click)="goToPreviousMonth()">前</button>
       <span class="text-lg font-bold"
-        >{{ currentYear }} - {{ currentMonth + 1 }}</span
+        >{{ currentYear }}年 {{ currentMonth + 1 }}月</span
       >
-      <button class="text-gray-600" (click)="goToNextMonth()">Next</button>
+      <button class="text-gray-600" (click)="goToNextMonth()">次</button>
     </div>
 
     <div class="grid grid-cols-7 gap-2 mt-4">
       <div
-        *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']"
+        *ngFor="let day of ['日', '月', '火', '水', '木', '金', '土']"
         class="text-center font-bold"
       >
         {{ day }}
